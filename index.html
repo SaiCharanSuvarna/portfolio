@@ -1,422 +1,811 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sai Charan Suvarna | Portfolio</title>
-    <style>
-        /* APPLE-INSPIRED DESIGN SYSTEM */
-        :root {
-            --bg-color: #f5f5f7; 
-            --card-bg: #ffffff;
-            --text-main: #1d1d1f;
-            --text-muted: #86868b;
-            --accent-blue: #0071e3;
-            --accent-hover: #0077ed;
-            --shadow: 0 4px 24px rgba(0,0,0,0.04);
-            --radius: 18px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sai Charan Suvarna | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #0f2e24;
+    --forest-mid: #1f5f4a;
+    --mint: #4caf7d;
+    --mint-deep: #2f7d60;
+    --mint-soft: #eaf6f0;
+    --ink: #1d1d1f;
+    --muted: #6e6e73;
+    --bg: #ffffff;
+    --surface: #f5f5f7;
+    --border: #e3e3e6;
+    --radius: 18px;
+    --max: 980px;
+    --ease: cubic-bezier(.4,0,.2,1);
+  }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.5;
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+  html { scroll-behavior: smooth; }
 
-        /* GLASSMORPHISM NAVBAR */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 50px;
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            z-index: 1000;
-        }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
 
-        nav h2 {
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
+  a { color: inherit; }
 
-        nav .links a {
-            text-decoration: none;
-            color: var(--text-main);
-            margin-left: 32px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
 
-        nav .links a:hover {
-            color: var(--accent-blue);
-        }
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
 
-        /* CONTAINER LAYOUT */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 140px 20px 60px;
-        }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
 
-        /* HERO SUMMARY */
-        .hero {
-            text-align: center;
-            margin-bottom: 90px;
-            animation: fadeIn 1s ease-out;
-        }
+  .brand {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
 
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            margin-bottom: 18px;
-        }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
 
-        .hero p {
-            font-size: 21px;
-            color: var(--text-muted);
-            max-width: 720px;
-            margin: 0 auto 32px;
-            font-weight: 400;
-            line-height: 1.5;
-        }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+    opacity: 0.75;
+    transition: opacity .2s var(--ease);
+  }
 
-        .hero button {
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            font-size: 16px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
+  .nav-links a:hover { opacity: 1; color: var(--mint-deep); }
 
-        .hero button:hover {
-            background: var(--accent-hover);
-            transform: scale(1.02);
-        }
+  /* HERO */
+  .hero {
+    background: radial-gradient(120% 140% at 50% -10%, var(--forest-mid) 0%, var(--forest) 55%, #081b15 100%);
+    color: #fff;
+    padding: 120px 24px 96px;
+    text-align: center;
+  }
 
-        /* SECTION HEADERS */
-        .section-title {
-            font-size: 32px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            margin-bottom: 35px;
-            text-align: center;
-        }
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: rise .7s var(--ease) forwards;
+  }
 
-        /* APPLE CARDS */
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 32px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+  .hero h1 {
+    font-size: clamp(40px, 7vw, 76px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: rise .7s var(--ease) .1s forwards;
+  }
 
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
+  .hero h1 strong { font-weight: 700; }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  .hero p {
+    max-width: 620px;
+    margin: 0 auto 36px;
+    font-size: 18px;
+    color: #d7efe4;
+    opacity: 0;
+    animation: rise .7s var(--ease) .2s forwards;
+  }
 
-        .card-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: rise .7s var(--ease) .3s forwards;
+  }
 
-        .card-subtitle {
-            font-size: 16px;
-            color: var(--text-muted);
-        }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-        .card-date {
-            font-size: 14px;
-            color: var(--text-muted);
-            font-weight: 500;
-            text-align: right;
-        }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 26px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+  }
+  .btn:active { transform: scale(0.97); }
 
-        /* EXPANDABLE CONTENT */
-        .expandable-content {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
-        }
+  .btn-primary {
+    background: var(--mint-deep);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #26694f; box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
 
-        .expandable-content.open {
-            max-height: 500px;
-            opacity: 1;
-            margin-top: 20px;
-        }
+  .btn-ghost {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border-color: rgba(255,255,255,0.35);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.14); }
 
-        .expandable-content ul {
-            padding-left: 20px;
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.6;
-        }
+  /* STATS STRIP */
+  .stats {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .stats .wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .stat-num {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700;
+    color: var(--forest);
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .stats .wrap > div + div { border-left: 1px solid var(--border); }
 
-        .expandable-content li {
-            margin-bottom: 10px;
-        }
+  /* SECTIONS */
+  .section { padding: 88px 24px; }
+  .section-inner { max-width: var(--max); margin: 0 auto; }
 
-        /* SOFT PILL BUTTON */
-        .expand-btn {
-            background: rgba(0, 113, 227, 0.08);
-            color: var(--accent-blue);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 20px;
-            display: inline-block;
-            transition: all 0.2s ease;
-        }
+  .section-head { text-align: center; margin-bottom: 48px; }
+  .section-head .eyebrow { color: var(--mint-deep); }
+  .section-head h2 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .section-head p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-        .expand-btn:hover {
-            background: rgba(0, 113, 227, 0.15);
-        }
+  .about-text {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 19px;
+    color: #333;
+  }
+  .about-text strong { color: var(--forest); }
 
-        /* SKILLS GRID */
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            justify-content: center;
-            margin-bottom: 70px;
-        }
+  /* ACCORDION (Experience / Projects) */
+  .acc-list {
+    max-width: 760px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+  }
 
-        .skill-tag {
-            background: var(--card-bg);
-            padding: 14px 22px;
-            border-radius: 24px;
-            font-size: 15px;
-            font-weight: 500;
-            box-shadow: var(--shadow);
-            color: var(--text-main);
-            transition: transform 0.2s ease;
-        }
-        
-        .skill-tag:hover {
-            transform: scale(1.03);
-        }
+  .acc-item { border-bottom: 1px solid var(--border); }
 
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
+  .acc-header {
+    width: 100%;
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    padding: 26px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
 
-        /* ANIMATIONS */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  .acc-title .role {
+    display: block;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .acc-title .org {
+    display: block;
+    font-size: 14px;
+    color: var(--mint-deep);
+    font-weight: 500;
+    margin-top: 2px;
+  }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            nav { padding: 16px 24px; }
-            .card-header { flex-direction: column; align-items: flex-start; }
-            .card-date { margin-top: 8px; text-align: left; }
-            .hero h1 { font-size: 42px; }
-            nav .links { display: none; } /* Simplified mobile nav for a cleaner look */
-        }
-    </style>
+  .acc-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+
+  .acc-dates {
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .acc-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    transition: transform .3s var(--ease);
+  }
+  .acc-item.open .acc-icon { transform: rotate(180deg); }
+
+  .acc-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .35s var(--ease);
+  }
+  .acc-item.open .acc-body { grid-template-rows: 1fr; }
+
+  .acc-body-inner { overflow: hidden; }
+
+  .acc-body ul {
+    padding: 0 4px 26px;
+    list-style: none;
+  }
+  .acc-body li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 15px;
+    color: #3a3a3c;
+    margin-bottom: 10px;
+  }
+  .acc-body li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mint);
+  }
+
+  /* SKILLS GRID */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow .25s var(--ease), border-color .25s var(--ease);
+  }
+  .skill-card.open,
+  .skill-card:hover {
+    box-shadow: 0 10px 26px rgba(15,46,36,0.08);
+    border-color: #d3e9dd;
+  }
+
+  .skill-card .acc-header { padding: 18px 20px; }
+  .skill-card .acc-title .role { font-size: 15px; }
+  .skill-card .acc-icon { width: 18px; height: 18px; }
+  .skill-card .acc-body ul { padding: 0 20px 20px; }
+  .skill-card .acc-body li { font-size: 14px; }
+
+  /* EDUCATION */
+  .edu-card {
+    max-width: 620px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+  }
+  .edu-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+  .edu-card .edu-dates { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .edu-card ul { list-style: none; display: inline-block; text-align: left; }
+  .edu-card li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 15px;
+    color: #3a3a3c;
+    margin-bottom: 8px;
+  }
+  .edu-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mint);
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--forest);
+    color: #fff;
+  }
+  .contact-section .section-head h2 { color: #fff; }
+  .contact-section .section-head p { color: #b9d9c9; }
+  .contact-section .eyebrow { color: var(--mint); }
+
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 14px 22px;
+    border-radius: 100px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background .2s var(--ease), transform .2s var(--ease);
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+  .contact-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  footer {
+    text-align: center;
+    padding: 28px;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--bg);
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s var(--ease), transform .7s var(--ease);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  @media (max-width: 640px) {
+    .stats .wrap { grid-template-columns: 1fr; gap: 20px; }
+    .stats .wrap > div + div { border-left: none; border-top: 1px solid var(--border); padding-top: 20px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .acc-meta { flex-direction: column; align-items: flex-end; gap: 6px; }
+    .nav-links { gap: 18px; }
+  }
+</style>
 </head>
 <body>
 
-    <nav>
-        <h2>Sai Charan Suvarna <!--[cite: 1] --></h2>
-        <div class="links">
-            <a href="#about">About</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
+<nav>
+  <div class="nav-inner">
+    <div class="brand">Sai Charan Suvarna</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <span class="eyebrow">Milton, Ontario</span>
+  <h1>Sai Charan <strong>Suvarna</strong></h1>
+  <p>Student, entrepreneur, and builder. I run a five-person detailing business, tutor students at Kumon, and write the code that drives our robotics team's competition robots.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn btn-primary">Get in touch</a>
+    <a href="#experience" class="btn btn-ghost">See my experience</a>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div>
+      <div class="stat-num">$10K+</div>
+      <div class="stat-label">Revenue generated</div>
+    </div>
+    <div>
+      <div class="stat-num">110+</div>
+      <div class="stat-label">Client jobs completed</div>
+    </div>
+    <div>
+      <div class="stat-num">90%</div>
+      <div class="stat-label">Academic average</div>
+    </div>
+  </div>
+</div>
+
+<section class="section reveal" id="about">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">About</span>
+      <h2>A quick introduction</h2>
+    </div>
+    <p class="about-text">
+      I'm a high schooler in Milton, Ontario who likes turning ideas into things people actually use — whether that's
+      <strong>founding a detailing business</strong> that's brought in $10,000+ across 110+ jobs, tutoring students in math and reading at
+      <strong>Kumon</strong>, or writing C++ for my school's <strong>robotics team</strong>. I lead by doing: managing a five-person crew, coaching kids on
+      a snowboard hill, and volunteering with my local library for two years running.
+    </p>
+  </div>
+</section>
+
+<section class="section reveal" id="experience" style="background: var(--surface);">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">Experience</span>
+      <h2>Where I've worked</h2>
+      <p>Tap any role to see what it actually involved.</p>
+    </div>
+    <div class="acc-list">
+
+      <div class="acc-item">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title">
+            <span class="role">Teaching Assistant</span>
+            <span class="org">Kumon</span>
+          </div>
+          <div class="acc-meta">
+            <span class="acc-dates">Dec 2024 – Sep 2025</span>
+            <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Tutored up to 10 students per shift in math and reading through one-on-one and small-group instruction.</li>
+              <li>Maintained accurate grading records and organized student progress files for daily instruction.</li>
+              <li>Prepared lesson materials and organized classrooms to ensure sessions started on time.</li>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </div>
 
-    <div class="container">
-        
-        <!-- HERO SECTION -->
-        <section class="hero" id="about">
-            <h1>Sai Charan Suvarna <!--[cite: 1] --></h1>
-            <p>Driven student and entrepreneur with a 90% academic average <!--[cite: 1] -->. Founder of a profitable independent business generating $10,000+ in revenue <!--[cite: 1] -->. Proven track record in team leadership, technical programming, and delivering excellent customer service <!--[cite: 1] -->.</p>
-            <button onclick="document.getElementById('footer').scrollIntoView()">Contact Me</button>
-        </section>
+      <div class="acc-item">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title">
+            <span class="role">Snowboard Instructor</span>
+            <span class="org">Glen Eden</span>
+          </div>
+          <div class="acc-meta">
+            <span class="acc-dates">Dec 2025 – Mar 2026</span>
+            <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Instructed beginner and intermediate snowboarders while enforcing safety procedures and proper riding technique.</li>
+              <li>Communicated student progress and next steps to parents after every lesson.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-        <!-- EXPERIENCE SECTION -->
-        <section id="experience">
-            <h2 class="section-title">Experience <!--[cite: 1] --></h2>
-
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Teaching Assistant <!--[cite: 1] --></div>
-                        <div class="card-subtitle">Kumon <!--[cite: 1] --></div>
-                    </div>
-                    <div class="card-date">Dec 2024 – Sep 2025 <!--[cite: 1] --></div>
-                </div>
-                <button class="expand-btn" onclick="toggleDetails(this, 'exp1')">View Details +</button>
-                <div class="expandable-content" id="exp1">
-                    <ul>
-                        <li>Tutored up to 10 students per shift in math and reading, helping improve understanding through instruction <!--[cite: 1] -->.</li>
-                        <li>Maintained accurate grading records and organized student progress files for daily instruction <!--[cite: 1] -->.</li>
-                        <li>Prepared lesson materials and organized classrooms to ensure sessions started on time <!--[cite: 1] -->.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Snowboard Instructor <!--[cite: 1] --></div>
-                        <div class="card-subtitle">Glen Eden <!--[cite: 1] --></div>
-                    </div>
-                    <div class="card-date">Dec 2025 – Mar 2026 <!--[cite: 1] --></div>
-                </div>
-                <button class="expand-btn" onclick="toggleDetails(this, 'exp2')">View Details +</button>
-                <div class="expandable-content" id="exp2">
-                    <ul>
-                        <li>Instructed beginner and intermediate snowboarders while enforcing safety procedures and technique <!--[cite: 1] -->.</li>
-                        <li>Communicated student progress and next steps to parents after lessons <!--[cite: 1] -->.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Teen Advisory Group Member <!--[cite: 1] --></div>
-                        <div class="card-subtitle">Milton Public Library <!--[cite: 1] --></div>
-                    </div>
-                    <div class="card-date">Dec 2023 – Dec 2025 <!--[cite: 1] --></div>
-                </div>
-                <button class="expand-btn" onclick="toggleDetails(this, 'exp3')">View Details +</button>
-                <div class="expandable-content" id="exp3">
-                    <ul>
-                        <li>Presented project ideas to library staff, resulting in multiple proposals being approved <!--[cite: 1] -->.</li>
-                        <li>Grew leadership and project management skills over 2 years through volunteer commitment <!--[cite: 1] -->.</li>
-                        <li>Collaborated with members to organize library activities and outreach initiatives <!--[cite: 1] -->.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <br><br>
-
-        <!-- PROJECTS SECTION -->
-        <section id="projects">
-            <h2 class="section-title">Projects & Leadership <!--[cite: 1] --></h2>
-
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Founder & Owner <!--[cite: 1] --></div>
-                        <div class="card-subtitle">Independent Car Detailing Business <!--[cite: 1] --></div>
-                    </div>
-                    <div class="card-date">Aug 2024 – Present <!--[cite: 1] --></div>
-                </div>
-                <button class="expand-btn" onclick="toggleDetails(this, 'proj1')">View Details +</button>
-                <div class="expandable-content" id="proj1">
-                    <ul>
-                        <li>Generated $10,000 in revenue across 110+ client jobs by managing bookings and marketing <!--[cite: 1] -->.</li>
-                        <li>Designed and launched a responsive business website using HTML, CSS, and JavaScript <!--[cite: 1] -->.</li>
-                        <li>Managed a 5-person team by coordinating schedules and delegating tasks <!--[cite: 1] -->.</li>
-                        <li>Tracked revenue, expenses, and purchased supplies <!--[cite: 1] -->.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Robot Programmer <!--[cite: 1] --></div>
-                        <div class="card-subtitle">Bishop Reding CSS Robotics Team <!--[cite: 1] --></div>
-                    </div>
-                    <div class="card-date">Sep 2023 – Present <!--[cite: 1] --></div>
-                </div>
-                <button class="expand-btn" onclick="toggleDetails(this, 'proj2')">View Details +</button>
-                <div class="expandable-content" id="proj2">
-                    <ul>
-                        <li>Developed and tested autonomous and driver-control code in C++ for competition robots <!--[cite: 1] -->.</li>
-                        <li>Worked with builders, designers, and programmers to integrate software with the robot <!--[cite: 1] -->.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <br><br>
-
-        <!-- SKILLS SECTION -->
-        <section id="skills">
-            <h2 class="section-title">Core Skills <!--[cite: 1] --></h2>
-            <div class="skills-grid">
-                <div class="skill-tag">Web Development (HTML, JS, CSS) <!--[cite: 1] --></div>
-                <div class="skill-tag">Robot Programming (C++, C) <!--[cite: 1] --></div>
-                <div class="skill-tag">Team Management <!--[cite: 1] --></div>
-                <div class="skill-tag">Leadership <!--[cite: 1] --></div>
-                <div class="skill-tag">Financial Management <!--[cite: 1] --></div>
-                <div class="skill-tag">Customer Service <!--[cite: 1] --></div>
-                <div class="skill-tag">Public Speaking <!--[cite: 1] --></div>
-                <div class="skill-tag">Google Workspace & Office 365 <!--[cite: 1] --></div>
-                <div class="skill-tag">Workplace Safety <!--[cite: 1] --></div>
-            </div>
-        </section>
-
-        <!-- FOOTER / CONTACT -->
-        <footer id="footer">
-            <p>Milton, ON • 437-667-9347 • saicharansuvarna09@gmail.com <!--[cite: 1] --></p>
-            <p style="margin-top: 10px;">© 2026 Sai Charan Suvarna. All rights reserved.</p>
-        </footer>
+      <div class="acc-item">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title">
+            <span class="role">Teen Advisory Group Member</span>
+            <span class="org">Milton Public Library</span>
+          </div>
+          <div class="acc-meta">
+            <span class="acc-dates">Dec 2023 – Dec 2025</span>
+            <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Presented project ideas to library staff and younger students, resulting in multiple approved proposals.</li>
+              <li>Grew leadership and project management skills over two years of consistent volunteer commitment.</li>
+              <li>Collaborated with fellow members to plan and deliver library activities and outreach initiatives.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
     </div>
+  </div>
+</section>
 
-    <!-- JAVASCRIPT FOR EXPANDABLE CARDS -->
-    <script>
-        function toggleDetails(buttonElement, contentId) {
-            const content = document.getElementById(contentId);
-            
-            if (content.classList.contains('open')) {
-                content.classList.remove('open');
-                buttonElement.innerText = 'View Details +';
-            } else {
-                content.classList.add('open');
-                buttonElement.innerText = 'Hide Details -';
-            }
-        }
-    </script>
+<section class="section reveal" id="projects">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">Projects</span>
+      <h2>What I've built</h2>
+      <p>Two things I started from scratch and still run today.</p>
+    </div>
+    <div class="acc-list">
+
+      <div class="acc-item">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title">
+            <span class="role">Founder &amp; Owner, Car Detailing Business</span>
+            <span class="org">Independent</span>
+          </div>
+          <div class="acc-meta">
+            <span class="acc-dates">Aug 2024 – Present</span>
+            <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Generated $10,000 in revenue across 110+ client jobs, handling bookings, marketing, and detailing myself.</li>
+              <li>Designed and launched a responsive business website with HTML, CSS, and JavaScript to showcase services and generate inquiries.</li>
+              <li>Managed a 5-person team, coordinating schedules and delegating tasks to keep service quality consistent.</li>
+              <li>Tracked revenue, expenses, and supply purchases to keep the business profitable.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title">
+            <span class="role">Robot Programmer</span>
+            <span class="org">Bishop Reding CSS Robotics Team</span>
+          </div>
+          <div class="acc-meta">
+            <span class="acc-dates">Sep 2023 – Present</span>
+            <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Developed and tested autonomous and driver-control code in C++ for competition robots, troubleshooting issues during matches.</li>
+              <li>Worked with builders, designers, and fellow programmers to integrate software with the robot ahead of competitions.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="skills" style="background: var(--surface);">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">Skills</span>
+      <h2>What I bring to the table</h2>
+      <p>Tap a skill to see where it comes from.</p>
+    </div>
+    <div class="skills-grid">
+
+      <div class="acc-item skill-card">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title"><span class="role">Customer Service</span></div>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner"><ul>
+          <li>Built lasting client relationships running my detailing business and helping students and parents at Kumon.</li>
+        </ul></div></div>
+      </div>
+
+      <div class="acc-item skill-card">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title"><span class="role">Leadership</span></div>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner"><ul>
+          <li>Grew into leadership through two years with the Library's Teen Advisory Group and running my own crew.</li>
+        </ul></div></div>
+      </div>
+
+      <div class="acc-item skill-card">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title"><span class="role">Team Management</span></div>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner"><ul>
+          <li>Coordinated schedules and delegated tasks across a 5-person detailing crew to keep quality consistent.</li>
+        </ul></div></div>
+      </div>
+
+      <div class="acc-item skill-card">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title"><span class="role">Public Speaking</span></div>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner"><ul>
+          <li>Presented project proposals to library staff and younger students, several of which were approved.</li>
+        </ul></div></div>
+      </div>
+
+      <div class="acc-item skill-card">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title"><span class="role">Workplace Safety</span></div>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner"><ul>
+          <li>Enforced safety procedures and proper technique while instructing snowboarders at Glen Eden.</li>
+        </ul></div></div>
+      </div>
+
+      <div class="acc-item skill-card">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title"><span class="role">Google Workspace</span></div>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner"><ul>
+          <li>Used daily for scheduling, tracking, and communication across my tutoring and detailing work.</li>
+        </ul></div></div>
+      </div>
+
+      <div class="acc-item skill-card">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title"><span class="role">Microsoft Office 365</span></div>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner"><ul>
+          <li>Comfortable across Word, Excel, and Outlook for records, reports, and communication.</li>
+        </ul></div></div>
+      </div>
+
+      <div class="acc-item skill-card">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title"><span class="role">Robot Programming (C++, C)</span></div>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner"><ul>
+          <li>Write autonomous and driver-control code for competition robots on my school's robotics team.</li>
+        </ul></div></div>
+      </div>
+
+      <div class="acc-item skill-card">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title"><span class="role">Financial Management</span></div>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner"><ul>
+          <li>Track revenue, expenses, and supply purchases for my car detailing business.</li>
+        </ul></div></div>
+      </div>
+
+      <div class="acc-item skill-card">
+        <button class="acc-header" aria-expanded="false">
+          <div class="acc-title"><span class="role">Web Development</span></div>
+          <svg class="acc-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f2e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner"><ul>
+          <li>Designed and built the responsive HTML, CSS, and JavaScript site that markets my detailing business — and this one.</li>
+        </ul></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="education">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">Education</span>
+      <h2>Where I study</h2>
+    </div>
+    <div class="edu-card">
+      <h3>Bishop Reding CSS</h3>
+      <div class="edu-dates">Sep 2023 – Sep 2027</div>
+      <ul>
+        <li>Honour Roll Student — 90% Academic Average</li>
+        <li>Student Athlete: Basketball Team</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section contact-section reveal" id="contact">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">Contact</span>
+      <h2>Let's talk</h2>
+      <p>Open to opportunities in Milton and the surrounding area.</p>
+    </div>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:saicharansuvarna09@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="#fff" stroke-width="1.6"/><path d="M4 6l8 7 8-7" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        saicharansuvarna09@gmail.com
+      </a>
+      <a class="contact-link" href="tel:+14376679347">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        437-667-9347
+      </a>
+      <span class="contact-link" style="cursor:default;">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12z" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="#fff" stroke-width="1.6"/></svg>
+        Milton, Ontario
+      </span>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Sai Charan Suvarna</footer>
+
+<script>
+  // Accordion toggle — shared by experience, projects, and skills cards
+  document.querySelectorAll('.acc-header').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = btn.closest('.acc-item');
+      var isOpen = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+    });
+  });
+
+  // Scroll reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(function (el) { observer.observe(el); });
+</script>
+
 </body>
 </html>
